@@ -1,0 +1,327 @@
+/*
+
+
+// Roboto font weights:
+$font-weights = {
+  thin: 100,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  bold: 700,
+  black: 900
+}
+
+$grid-gutter = 4px
+$grid-columns = 12
+$grid-gutters = {
+  xs: ($grid-gutter / 8)
+  sm: ($grid-gutter / 8)
+  md: $grid-gutter
+  lg: ($grid-gutter )
+  xl: ($grid-gutter )
+}
+
+$grid-breakpoints = {
+  xs: 0
+  sm: 700px
+  md: 700px
+  lg: (800px - 16px) // Desktop gets a 16dp reduction
+  xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
+}
+
+//$body-font-family = Segoe UI, Tahoma, Arial, sans-serif
+$body-font-family = Roboto, 'Segoe UI', Tahoma, Arial, sans-serif
+
+$color-pack = true
+$font-size-root = 16px
+
+$body-font-color = rgba(57, 61, 75, 0)
+$body-background-color-light = #fff
+$body-bg-light = #fff !important
+$body-color-light = #fff
+$grid-breakpoints = {
+  xs: 0
+  sm: 700px
+  md: 700px
+  lg: (800px - 16px) // Desktop gets a 16dp reduction
+  xl: (1920px - 16px) // https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-breakpoints
+}
+
+// @import '~vuetify/src/stylus/main'
+// For a-la-carte
+//$material.background = #fff
+//@require '~vuetify/src/stylus/theme'
+$material-light = {
+  bg-color: #fff
+  fg-color: #000
+  text-color: #000
+  primary-text-percent: .87
+  secondary-text-percent: .54
+  disabledORhints-text-percent: .38
+  divider-percent: .12
+  active-icon-percent: .54
+  inactive-icon-percent: .38
+}
+
+$material-dark = {
+  app-bar: #212121,
+  background: #303030,
+  cards: #424242,
+  bg-color: #303030
+  fg-color: #fff
+  text-color: #fff
+  primary-text-percent: 1
+  secondary-text-percent: .70
+  disabledORhints-text-percent: .50
+  divider-percent: .12
+  active-icon-percent: 1
+  inactive-icon-percent: .50
+}
+
+// Default Material Theme
+// ============================================================
+$material-theme = $material-light
+$material-twelve-percent-light := rgba($material-dark.fg-color, $material-dark.divider-percent)
+$material-twelve-percent-dark := rgba($material-light.fg-color, $material-light.divider-percent)
+
+
+// Theme
+// ============================================================
+$body-bg-light = $material-light.background
+$body-bg-dark = $material-dark.background
+$body-color-light = rgba($material-dark.text-color, $material-dark.primary-text-percent)
+$body-color-dark = rgba($material-light.text-color, $material-light.primary-text-percent)
+$color-theme = rgba($material-theme.text-color, $material-theme.primary-text-percent)
+
+$material-light.bg-color = #fff
+$material-light.background = #fff
+$material-theme.bg-color = #fff
+$material-theme.background = #fff
+$material-theme = $material-light
+$body-bg-light = $material-light.background
+$body-bg-dark = $material-dark.background
+
+// Toolbar
+$toolbar-height = 56px
+$toolbar-item-padding = 0 16px
+$toolbar-padding-y = 0
+$toolbar-padding-x = 16px
+
+
+
+
+$grid-gutter = 4px
+$grid-columns = 12
+$grid-gutters = {
+  xs: ($grid-gutter / 8)
+  sm: ($grid-gutter / 8)
+  md: $grid-gutter
+  lg: ($grid-gutter )
+  xl: ($grid-gutter )
+}
+//@import '~vuetify/src/stylus/theme'
+//$material-light.background = #fff
+//@import '~vuetify/src/stylus/settings/_variables'
+@import '~vuetify/src/stylus/app'
+//@import '~vuetify/src/stylus/main'
+//@import '~vuetify/src/stylus/main'
+
+!*application($material)
+	background: #f00*!
+
+//COLOR SCHEMES ARE DEFINED IN THE plugins/theme.ts typescript file.
+
+//primary color scheme:
+//base: '#0288D1', // main header background color
+//lighten1: '#039BE5', //secondary header background color
+//accent1: '#009de1' //checkbox color
+
+
+//secondary color scheme
+//lighten5: '#fafafa',
+//lighten4: '#f5f5f5', //card heading backgrounds
+//lighten3: '#eee', //main page background color
+//lighten2: '#cfcfcf', //dividers between items
+//lighten1: '#cccccc',
+//base: '#BDBDBD', //card heading border color
+//darken1: '#999999', //label color
+//darken2: '#707070', //card headings and footer text
+//darken3: '#616161',
+//darken4: '#333' //body text
+
+
+.theme--light {
+	&.application {
+		background: #fff;
+		//background: var(--v-secondary-lighten3) !important;
+	}
+
+	.v-card {
+		&__title {
+			background: var(--v-secondary-lighten4);
+			color: var(--v-secondary-darken2);
+			height: 40px;
+			font-size: 14px;
+			font-weight: $font-weights.medium;
+			text-transform uppercase;
+			border-bottom: 1px solid var(--v-secondary-base);
+		}
+	}
+
+	.v-datatable {
+		thead {
+			tr {
+				//height: 48px;
+				height: 40px;
+
+				th {
+					//background-color: var(--v-secondary-lighten2); //#f5f5f5
+					background: var(--v-secondary-lighten4);
+					color: var(--v-secondary-darken2);
+				}
+			}
+		}
+
+		th,
+		td {
+			font-size: 13px;
+		}
+
+		tbody {
+			tr:not(:last-child) {
+				border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+			}
+
+			.column {
+				//padding-left: 24px;
+				//padding-right: 16px;
+				//padding-top: 8px;
+			}
+		}
+	}
+}
+
+.v-toolbar {
+	&__extension {
+		background: var(--v-primary-lighten1);
+		margin-left: 0;
+
+		> .v-toolbar {
+			&__title {
+				margin-left: 0;
+			}
+		}
+	}
+}
+
+.v-expansion-panel {
+	margin-bottom: 0;
+
+	&__header {
+		font-size: 14px;
+	}
+}
+
+.v-expansion-panel {
+	margin-bottom: 0;
+
+	&__header {
+		//background-color: #f5f5f5;
+		background: var(--v-secondary-lighten3)
+		font-weight: 500;
+		display: flex;
+		cursor: pointer;
+		align-items: center;
+		position: relative;
+		padding: 12px 24px;
+		border-radius: 0;
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 1px solid var(--v-secondary-base);
+		max-height: 48px;
+	}
+
+	&__container--disabled {
+		color: #333;
+	}
+}
+
+.v-datatable__progress {
+	> th {
+		&.column {
+			padding: 0;
+		}
+	}
+}
+
+>>> table.v-table thead tr {
+	height: 40px;
+
+}
+
+>>> table.v-table thead th {
+	padding: 0;
+}
+
+
+.v-datatable,
+.v-table {
+	thead {
+		th {
+			//background-color: var(--v-secondary-lighten2); //#f5f5f5
+			background: var(--v-secondary-lighten4);
+			color: var(--v-secondary-darken2);
+		}
+
+		tr {
+			//height: 48px;
+			height: 40px;
+		}
+	}
+
+	th,
+	td {
+		font-size: 13px;
+	}
+
+	tbody {
+		tr:not(:last-child) {
+			border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+		}
+
+		.column {
+			//padding-left: 24px;
+			//padding-right: 16px;
+			//padding-top: 8px;
+		}
+	}
+}
+.v-text-field {
+	&.v-text-field--single-line {
+		margin-top:0;
+		padding-top:2px;
+
+	}
+	> .v-input__control > .v-input__slot:before,
+	> .v-input__control > .v-input__slot:after{
+		bottom: 0px !important;
+	}
+}
+
+.border-radius-2 {
+	border-radius: 8px;
+}
+
+!*
+.application {
+	&.theme--light {
+		background: #f00
+	}
+}*!
+!*.container.fluid{
+	background-color : #efefef!important
+}*!
+
+
+*/
