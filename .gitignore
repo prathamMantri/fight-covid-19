@@ -29,3 +29,23 @@ build/
 
 ### VS Code ###
 .vscode/
+backend/src/main/java/com/pmantri/fightcovid19/config/MySqlDevConfig.java
+backend/src/main/resources/META-INF/
+backend/src/main/resources/application-dev.properties
+backend/src/main/resources/public/static/css/
+backend/src/main/resources/public/static/js/
+backend/src/main/resources/static/
+backend/src/main/resources/templates/
+frontend/public/fightcovid19.png
+frontend/src/main.js
+frontend/src/main.js.map
+frontend/src/plugins/grid.js
+frontend/src/plugins/grid.js.map
+frontend/src/plugins/theme.js
+frontend/src/plugins/theme.js.map
+frontend/src/plugins/vuetify.js
+frontend/src/plugins/vuetify.js.map
+frontend/src/router/index.js
+frontend/src/router/index.js.map
+frontend/src/store/index.js
+frontend/src/store/index.js.map

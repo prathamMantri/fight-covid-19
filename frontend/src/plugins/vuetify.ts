@@ -6,12 +6,13 @@ import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
-const opts = {};
+const opts = {}
 
 export default new Vuetify({
-    icons: {
-        iconfont: 'md', // default - only for display purposes
-    }, opts
+	icons: {
+		iconfont: 'md', // default - only for display purposes
+	},
+	opts
 })

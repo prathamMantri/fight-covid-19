@@ -11,23 +11,23 @@ import {VuetifyGrid} from '@/types'
  *
  */
 export default Vue.extend({
-    data() {
-        return {
-            gutter: 8
-        }
-    },
-    computed: {
-        grid(): VuetifyGrid {
-            return {
-                gutters: {
-                    xs: (this.gutter / 4),
-                    sm: (this.gutter / 2),
-                    md: this.gutter,
-                    lg: (this.gutter * 2),
-                    xl: (this.gutter * 3)
-                }
-            }
-        }
-    },
+	data() {
+		return {
+			gutter: 8
+		}
+	},
+	computed: {
+		grid(): VuetifyGrid {
+			return {
+				gutters: {
+					xs: (this.gutter / 4),
+					sm: (this.gutter / 2),
+					md: this.gutter,
+					lg: (this.gutter * 2),
+					xl: (this.gutter * 3)
+				}
+			}
+		}
+	},
 })
 
