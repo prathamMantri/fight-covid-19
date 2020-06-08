@@ -86,6 +86,7 @@
 
 <script>
 import NavMain from '@/components/nav/NavMain'
+import EventBus from '@/event-bus'
 
 export default {
 	props: {
@@ -103,6 +104,31 @@ export default {
 			return this.$route.matched
 		}
 	},
+
+	methods: {
+		logout() {
+			const promise = this.$http.get('user/logout')
+			return promise.then(response => {
+				const logout = response.data
+				if (logout) {
+					window.location.replace(logout)
+				}
+			}).catch(error => {
+				if (error) {
+					EventBus.$emit('toast.show', {
+						message: 'Failed to logout',
+						type: 'warning',
+						position: 'top',
+						timeout: 3000
+					})
+					console.log(error.stack)
+				}
+				return []
+			}).finally(() => {
+			}
+			)
+		},
+	}
 
 }
 </script>

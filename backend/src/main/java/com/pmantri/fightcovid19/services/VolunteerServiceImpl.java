@@ -14,11 +14,11 @@ public class VolunteerServiceImpl implements VolunteerService {
     VolunteerDao volunteerDao;
 
     @Override
-    public void insertUpdateVolunteer(Volunteer volunteer, Boolean newVolunteer) {
+    public void registerVolunteer(Volunteer volunteer, Boolean newVolunteer) {
         if (newVolunteer) {
-            volunteerDao.insertVolunteer(volunteer);
+            volunteerDao.registerVolunteer(volunteer);
         } else {
-            volunteerDao.updateVolunteer(volunteer);
+            volunteerDao.updateVolunteerInfo(volunteer);
         }
     }
 

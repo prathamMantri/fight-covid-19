@@ -3,7 +3,7 @@
 		<v-row sm="12">
 			<v-col class="px-4" sm="12">
 				<ValidationObserver ref="observer" v-slot="{ validate, reset }">
-					<v-form ref="form" @submit.prevent="submit">
+					<v-form ref="form" @submit.prevent="submit" autocomplete="off">
 						<v-container fluid>
 							<v-row>
 								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
@@ -51,7 +51,8 @@
 									</ValidationProvider>
 								</v-col>
 								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
-									<ValidationProvider v-slot="{ errors }" name="phone number" rules="required|min:10|uniquePhone|validPhoneNumber|max:13">
+									<ValidationProvider v-slot="{ errors }" name="phone number"
+										rules="required|min:10|uniquePhone|validPhoneNumber|max:13">
 										<v-text-field
 											v-model="form.phoneNumber"
 											:error-messages="errors"
@@ -88,46 +89,49 @@
 									>
 										<vuetify-google-autocomplete
 											id="map"
-											:v-model="form.address"
+											:v-model="form.address1"
+											:value="form.address1"
 											append-icon="place"
 											:error-messages="errors"
-											label="Type your address"
+											required="true"
+											:clearable="true"
+											label="Where are you located"
 											placeholder=""
 											v-on:placechanged="getAddressData"
 										>
 										</vuetify-google-autocomplete>
 									</ValidationProvider>
 								</v-col>
-								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
-									<ValidationProvider v-slot="{ errors }" name="City" rules="required">
-										<v-text-field
-											v-model="form.city"
-											:error-messages="errors"
-											label="City"
-											required
-										></v-text-field>
-									</ValidationProvider>
-								</v-col>
-								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
-									<ValidationProvider v-slot="{ errors }" name="state" rules="required">
-										<v-text-field
-											v-model="form.state"
-											:error-messages="errors"
-											label="State"
-											required
-										></v-text-field>
-									</ValidationProvider>
-								</v-col>
-								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
-									<ValidationProvider v-slot="{ errors }" name="country" rules="required">
-										<v-text-field
-											v-model="form.country"
-											:error-messages="errors"
-											label="Country"
-											required
-										></v-text-field>
-									</ValidationProvider>
-								</v-col>
+								<!--<v-col cols="12" sm="6" md="6" lg="4" xl="4">
+                  <ValidationProvider v-slot="{ errors }" name="City" rules="required">
+                    <v-text-field
+                      v-model="form.city"
+                      :error-messages="errors"
+                      label="City"
+                      required
+                    ></v-text-field>
+                  </ValidationProvider>
+                </v-col>-->
+								<!--<v-col cols="12" sm="6" md="6" lg="4" xl="4">
+                  <ValidationProvider v-slot="{ errors }" name="state" rules="required">
+                    <v-text-field
+                      v-model="form.state"
+                      :error-messages="errors"
+                      label="State"
+                      required
+                    ></v-text-field>
+                  </ValidationProvider>
+                </v-col>-->
+								<!--<v-col cols="12" sm="6" md="6" lg="4" xl="4">
+                  <ValidationProvider v-slot="{ errors }" name="country" rules="required">
+                    <v-text-field
+                      v-model="form.country"
+                      :error-messages="errors"
+                      label="Country"
+                      required
+                    ></v-text-field>
+                  </ValidationProvider>
+                </v-col>-->
 								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
 									<ValidationProvider v-slot="{ errors }" name="zip" rules="required">
 										<v-text-field
@@ -138,6 +142,50 @@
 										></v-text-field>
 									</ValidationProvider>
 								</v-col>
+								<!--<v-col cols="12" sm="6" md="6" lg="4" xl="4">
+									<ValidationProvider v-slot="{ errors }" name="help categories" rules="required">
+										<v-combobox
+											v-model="form.helpCategorySelected"
+											:filer="filter"
+											:items="helpCategory"
+											:search-input.sync="search"
+											:error-messages="errors"
+											item-text="helpCategoryText"
+											item-value="helpCategoryId"
+											label="I can help with (Please type to add more options)"
+											multiple
+											small-chipsV
+										>
+											<template v-slot:selection="{ attrs, item, parent, selected }">
+												<v-chip
+													v-if="item === Object(item)"
+													v-bind="attrs"
+													:input-value="selected"
+													label
+													color="primary"
+													small
+												>
+													<span class="pr-2">
+														{{ item.helpCategoryText }}
+													</span>
+													<v-icon
+														small
+														@click="parent.selectItem(item)"
+													>close</v-icon>
+												</v-chip>
+											</template>
+											<template v-slot:no-data>
+												<v-list-item>
+													<v-list-item-content>
+														<v-list-item-title>
+															No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+														</v-list-item-title>
+													</v-list-item-content>
+												</v-list-item>
+											</template>
+										</v-combobox>
+									</ValidationProvider>
+								</v-col>-->
 								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
 									<ValidationProvider
 										ref="termsProvider"
@@ -183,7 +231,6 @@
 										</v-col>
 										<v-col class="text-left" sm="6" md="6" lg="6" xl="6">
 											<v-btn
-												:disabled="!formIsValid"
 												color="primary"
 												type="submit"
 											>REGISTER
@@ -193,6 +240,7 @@
 								</v-col>
 							</v-row>
 						</v-card-actions>
+						<input autocomplete="false" name="hidden" type="text" v-show="addressAutocompleteFix">
 					</v-form>
 				</ValidationObserver>
 			</v-col>
@@ -239,6 +287,7 @@ const dictionary = {
 			requireAddress: fieldName => 'Please enter your address',
 			uniqueEmail: fieldName => 'Email is already registered.',
 			uniquePhone: fieldName => 'Phone number is already registered.',
+			internalError: fieldName => 'Internal Error occured',
 			uniqueUserName: fieldName => 'Username is already registered.',
 			validPhoneNumber: fieldName => 'Either phone number is not valid',
 		}
@@ -388,14 +437,17 @@ export default {
 			password: '',
 			phoneNumber: '',
 			email: '',
-			address: '',
+			address1: '',
+			address2:'',
 			city: '',
 			state: '',
 			country: '',
 			zip: '',
-			terms: false
+			terms: false,
+			helpCategorySelected: []
 		})
 		return {
+			addressAutocompleteFix: false,
 			notifications: false,
 			sound: true,
 			widgets: false,
@@ -408,8 +460,32 @@ export default {
 			snackbarColor: 'info',
 			terms: false,
 			googleAddress: '',
+			helpCategory: [],
+			search:'',
 			defaultForm
 		}
+	},
+	beforeMount() {
+		this.getHelpCategories()
+	},
+	watch: {
+		'form.helpCategorySelected'(val, prev) {
+			if (val.length === prev.length) return
+			this.form.helpCategorySelected = val.map(v => {
+				if (typeof v === 'string') {
+					v = {
+						helpCategoryText: v.toUpperCase(),
+						helpCategoryDesc: '',
+						helpCategoryStatus: 'PENDING',
+						helpCategoryVisibility: 0
+					}
+					this.helpCategory.push(v)
+					this.form.helpCategorySelected.push(v)
+					this.nonce++
+				}
+				return v
+			})
+		},
 	},
 	methods: {
 		resetForm() {
@@ -424,26 +500,26 @@ export default {
 				}
 			})
 		},
-
 		getAddressData: function (addressData, placeResultData, id) {
 			this.googleAddress = addressData
 			console.log(addressData)
-			console.log(placeResultData)
-			console.log(id)
-			this.form.address = addressData.street_number + ' ' + addressData.route
-			this.form.city = addressData.locality
-			this.form.zip = addressData.postal_code
-			this.form.state = addressData.administrative_area_level_1
-			this.form.country = addressData.country
+			console.log(addressData.locality)
+			console.log(addressData.administrative_area_level_1)
+			console.log(addressData.postal_code)
+			console.log(addressData.country)
+			this.form.address1 = addressData ? addressData.street_number + ' ' + ( addressData.route ? addressData.route : '') : this.form.address1
+			this.form.address2 = addressData.name
+			this.form.city = addressData.locality ? addressData.locality : ''
+			this.form.zip = addressData.postal_code ? addressData.postal_code : this.form.zip
+			this.form.state = addressData.administrative_area_level_1 ? addressData.administrative_area_level_1 : this.form.state
+			this.form.country = addressData.country ? addressData.country : this.form.country
 		},
-
 		async registerVolunteer() {
 			return new Promise((resolve, reject) => {
 				this.snackbarColor = 'info'
 				this.snackbarText = 'Registration is in progress.'
-				const endpoint = '/insertupdateuser'
-				axios
-					.post(endpoint, this.form)
+				const endpoint = '/registervolunteer'
+				axios.post(endpoint, this.form)
 					.then(response => {
 						console.log('saving the data')
 						if (response && response.data) {
@@ -453,6 +529,14 @@ export default {
 						}
 					})
 					.catch(error => {
+						this.$refs.observer.validate().then(result => {
+							if (result) {
+								this.snackbar = true
+								this.registerVolunteer()
+							}
+						})
+
+
 						this.snackbarColor = 'error'
 						this.snackbarText = 'Something went wrong. We are looking into it.'
 						this.snackbar = true
@@ -463,11 +547,42 @@ export default {
 						reject(error)
 					})
 			})
-		}
-	},
+		},
+		getHelpCategories() {
+			return new Promise((resolve, reject) => {
+				const endpoint = '/gethelpcategories'
+				axios.get(endpoint, {
+					responseType: 'json',
+					params: {}
+				})
+					.then(response => {
+						console.log('data retrieved')
+						if (response && response.data) {
+							this.helpCategory = response.data
+							console.log(this.helpCategory)
+						}
+					})
+					.catch(error => {
+						console.log('error in retrieving  data')
+						if (error) {
+							console.log(error.stack)
+						}
+						reject(error)
+					})
+			})
+		},
+		filter(item, queryText, itemText) {
+			const hasValue = val => val != null ? val : ''
+			const text = hasValue(itemText)
+			const query = hasValue(queryText)
+			return text.toString()
+				.toUpperCase()
+				.indexOf(query.toString().toUpperCase()) > -1
+		},
+	}
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 
 </style>

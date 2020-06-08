@@ -2,9 +2,9 @@ package com.pmantri.fightcovid19.models;
 
 import java.util.List;
 
-public class Volunteer {
+public class Requester {
 
-    VolunteerCredentials volunteerCredentials;
+    RequesterCredentials RequesterCredentials;
     String firstName;
     String lastName;
     String phoneNumber;
@@ -19,12 +19,12 @@ public class Volunteer {
     Integer active;
     Integer verified;
 
-    public VolunteerCredentials getVolunteerCredentials() {
-        return volunteerCredentials;
+    public RequesterCredentials getRequesterCredentials() {
+        return RequesterCredentials;
     }
 
-    public void setVolunteerCredentials(VolunteerCredentials volunteerCredentials) {
-        this.volunteerCredentials = volunteerCredentials;
+    public void setRequesterCredentials(RequesterCredentials volunteerCredentials) {
+        this.RequesterCredentials = volunteerCredentials;
     }
 
     public String getFirstName() {
@@ -133,8 +133,8 @@ public class Volunteer {
 
     @Override
     public String toString() {
-        return "Volunteer{" +
-                "userCredentials=" + volunteerCredentials +
+        return "Requester{" +
+                "requesterCredentials=" + RequesterCredentials +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
