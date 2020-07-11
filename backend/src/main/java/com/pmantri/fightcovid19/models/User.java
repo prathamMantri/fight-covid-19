@@ -1,10 +1,12 @@
 package com.pmantri.fightcovid19.models;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Volunteer {
-
-    VolunteerCredentials volunteerCredentials;
+public class User {
+    Long userId;
+    String username;
+    String password;
     String firstName;
     String lastName;
     String phoneNumber;
@@ -15,16 +17,41 @@ public class Volunteer {
     String state;
     String country;
     String zip;
-    List<HelpCategory> helpCategoryList;
     Integer active;
     Integer verified;
 
-    public VolunteerCredentials getVolunteerCredentials() {
-        return volunteerCredentials;
+    private Set<Role> roles = new HashSet<>();
+
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setVolunteerCredentials(VolunteerCredentials volunteerCredentials) {
-        this.volunteerCredentials = volunteerCredentials;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {
@@ -115,14 +142,6 @@ public class Volunteer {
         this.active = active;
     }
 
-    public List<HelpCategory> getHelpCategoryList() {
-        return helpCategoryList;
-    }
-
-    public void setHelpCategoryList(List<HelpCategory> helpCategoryList) {
-        this.helpCategoryList = helpCategoryList;
-    }
-
     public Integer getVerified() {
         return verified;
     }
@@ -133,17 +152,14 @@ public class Volunteer {
 
     @Override
     public String toString() {
-        return "Volunteer{" +
-                "userCredentials=" + volunteerCredentials +
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", address='" + address1 + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", country='" + country + '\'' +
-                ", zip='" + zip + '\'' +
+                ", active=" + active +
+                ", verified=" + verified +
+                ", roles=" + roles +
                 '}';
     }
 }

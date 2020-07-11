@@ -11,6 +11,7 @@ public class IndexController {
 
     @GetMapping({
             "/",
+            "/login"
     })
     public String index(Model model) {
         return "index";

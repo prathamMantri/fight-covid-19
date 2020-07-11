@@ -1,14 +1,14 @@
 package com.pmantri.fightcovid19.dao;
 
 import com.pmantri.fightcovid19.models.Request;
-import com.pmantri.fightcovid19.models.Requester;
+import com.pmantri.fightcovid19.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class RequestDaoImpl implements RequestDao {
+public class RequestDaoImpl implements RequesterDao {
 
 
     private static final String GET_REQUESTER_CRED_ID = "SELECT FC_REQ_CRED_ID FROM FC_REQUESTER_CREDENTIALS WHERE FC_REQ_CRED_USERNAME = ?";
@@ -23,22 +23,6 @@ public class RequestDaoImpl implements RequestDao {
             "VALUES(?,?,?, sha1(?), ?, ?)";
 
 
-    private static final String INSERT_REQUESTER_CONTACT = "INSERT INTO FC_REQUESTER_CONTACT (" +
-            "REQ_CRED_ID, " +
-            "FC_REQ_PHONE_NUMBER_1, " +
-            "FC_REQ_EMAIL_ADDR_1) " +
-            "VALUES(?, ?, ?)";
-
-
-    private static final String INSERT_REQUESTER_ADDRESS = "INSERT INTO FC_REQUESTER_ADDRESS (" +
-            "REQ_CRED_ID, " +
-            "FC_REQ_STREET_NUMBER_1, " +
-            "FC_REQ_STREET_NUMBER_2, " +
-            "FC_REQ_CITY, " +
-            "FC_REQ_STATE, " +
-            "FC_REQ_COUNTRY, " +
-            "FC_REQ_ZIP )" +
-            "VALUES(?, ?, ?, ?, ?, ?, ?)";
 
     private static final String INSERT_REQUEST_DETAILS = "INSERT INTO FC_REQUEST_DETAILS(" +
             "FC_REQUESTER_ID, " +
@@ -60,35 +44,13 @@ public class RequestDaoImpl implements RequestDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+
+    @Autowired
+    UserDao userDao;
+
     @Override
-    public void postRequest(Requester requester, Request request) {
-
-        boolean userCredInserted = jdbcTemplate.update(INSERT_REQUESTER_CRED,
-                requester.getFirstName(),
-                requester.getLastName(),
-                requester.getRequesterCredentials().getRequesterUserName(),
-                requester.getRequesterCredentials().getRequesterPassword(),
-                requester.getActive(),
-                requester.getVerified()) > 0;
-
-        if (userCredInserted) {
-            Integer volunteerCredId = jdbcTemplate.queryForObject(
-                    GET_REQUESTER_CRED_ID, new Object[]{requester.getRequesterCredentials().getRequesterUserName()}, Integer.class);
-
-            jdbcTemplate.update(INSERT_REQUESTER_ADDRESS,
-                    volunteerCredId,
-                    requester.getAddress1(),
-                    requester.getAddress2(),
-                    requester.getCity(),
-                    requester.getState(),
-                    requester.getCountry(),
-                    requester.getZip());
-
-            jdbcTemplate.update(INSERT_REQUESTER_CONTACT, volunteerCredId,
-                    requester.getPhoneNumber(),
-                    requester.getEmailAddress());
-
-            jdbcTemplate.update(INSERT_REQUEST_DETAILS, volunteerCredId,
+    public void postRequest(User requester, Request request) {
+            jdbcTemplate.update(INSERT_REQUEST_DETAILS, requester.getUserId(),
                     request.getRequesterType(),
                     request.getRequestDescription(),
                     request.getRequestVerified(),
@@ -97,8 +59,6 @@ public class RequestDaoImpl implements RequestDao {
                     request.getRequestStartedDttm(),
                     request.getRequestModifiedDttm(),
                     request.getRequestResolvedDttm());
-
-        }
             //insertIntoVolunteerHelpCategories(volunteer, volunteerDetId);
     }
 
@@ -112,7 +72,4 @@ public class RequestDaoImpl implements RequestDao {
         }
         return true;
     }
-
-
-
 }

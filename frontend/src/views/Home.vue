@@ -4,31 +4,31 @@
 			title="Home"
 		/>
 		<v-row align="center" sm="12">
-			<v-carousel
-				cycle
-				height="400"
-				interval="2000"
-				hide-delimiter-background
-				show-arrows-on-hover
-			>
-				<v-carousel-item
-					v-for="(slide, i) in slides"
-					:key="i"
-				>
-					<v-sheet
-						:color="colors[i]"
-						height="100%"
-					>
-						<v-row
-							class="fill-height"
-							align="center"
-							justify="center"
-						>
-							<div class="display-3">STAY {{slide}}</div>
-						</v-row>
-					</v-sheet>
-				</v-carousel-item>
-			</v-carousel>
+			<!--	<v-carousel
+          cycle
+          height="400"
+          interval="2000"
+          hide-delimiter-background
+          show-arrows-on-hover
+        >
+          <v-carousel-item
+            v-for="(slide, i) in slides"
+            :key="i"
+          >
+            <v-sheet
+              :color="colors[i]"
+              height="100%"
+            >
+              <v-row
+                class="fill-height"
+                align="center"
+                justify="center"
+              >
+                <div class="display-3">STAY {{slide}}</div>
+              </v-row>
+            </v-sheet>
+          </v-carousel-item>
+        </v-carousel>-->
 		</v-row>
 		<v-row align="center" sm="12">
 			<v-col cols="12" sm="6">
@@ -51,50 +51,51 @@
 				<p class="display-3 text-sm-center">Under construction.. Please be patient!</p>
 			</div>
 		</v-row>
+		<v-snackbar
+			v-model="snackbarProps.snackbar"
+			:color="snackbarProps.color"
+			:multi-line="true"
+			:timeout="snackbarProps.timeout"
+			:top="true"
+		>
+			{{ snackbarProps.text }}
+			<v-btn
+				v-if="snackbarProps.color!=='info'"
+				dark
+				text
+				@click="snackbarProps.color = false"
+			>
+				Close
+			</v-btn>
+			<v-progress-circular
+				v-else
+				indeterminate
+				color="amber"
+			></v-progress-circular>
+		</v-snackbar>
 	</v-container>
 </template>
 
 <script>
+
 import vueHeadful from 'vue-headful'
+import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+
 export default {
 	name: 'Home',
 	component: {vueHeadful},
 	computed: {
-		formIsValid () {
-			return (
-				this.form.first &&
-				this.form.last &&
-				this.form.terms
-			)
-		}
+		...mapState('auth', ['status']),
+		...mapState('home', ['snackbarProps']),
 	},
-	data () {
-		const defaultForm = Object.freeze({
-			first: '',
-			last: '',
-			bio: '',
-			favoriteAnimal: '',
-			age: null,
-			terms: false
-		})
+	data() {
 		return {
 			needHelpDialog: false,
 			canHelpDialog: false,
-			notifications: false,
-			sound: true,
-			widgets: false,
-			form: Object.assign({}, defaultForm),
-			rules: {
-				name: [val => (val || '').length > 0 || 'This field is required']
-			},
-			conditions: false,
-			snackbar: false,
-			terms: false,
-			drawer: true,
 			items: [
-				{ title: 'Dashboard', icon: 'mdi-view-dashboard' },
-				{ title: 'Contact', icon: 'mdi-phone-in-talk ' },
-				{ title: 'About', icon: 'mdi-help-box' }
+				{title: 'Dashboard', icon: 'mdi-view-dashboard'},
+				{title: 'Contact', icon: 'mdi-phone-in-talk '},
+				{title: 'About', icon: 'mdi-help-box'}
 			],
 			colors: [
 				'indigo',
@@ -112,19 +113,9 @@ export default {
 			],
 			miniVariant: true,
 			expandOnHover: true,
-			defaultForm
 		}
 	},
-	methods: {
-		resetForm () {
-			this.form = Object.assign({}, this.defaultForm)
-			this.$refs.form.reset()
-		},
-		submit () {
-			this.snackbar = true
-			this.resetForm()
-		}
-	}
+	methods: {}
 }
 </script>
 

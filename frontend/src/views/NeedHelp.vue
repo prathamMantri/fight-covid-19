@@ -503,6 +503,7 @@ export default {
 	},
 	data() {
 		const defaultForm = Object.freeze({
+			userType: 'REQUESTER',
 			firstName: '',
 			lastName: '',
 			zip: '',
@@ -518,8 +519,6 @@ export default {
 			phoneDisabled: false,
 			emailDisabled: true,
 			checkboxValidate: false,
-			needHelpDialog: false,
-			canHelpDialog: false,
 			notifications: false,
 			sound: true,
 			widgets: false,
@@ -564,7 +563,6 @@ export default {
 				},
 			],
 			conditions: false,
-			snackbar: false,
 			terms: false,
 			defaultForm,
 			zip: '',
@@ -629,8 +627,8 @@ export default {
 
 		getVolunteers(zip) {
 			return new Promise((resolve, reject) => {
-				this.snackbarColor = 'info'
-				this.snackbarText = 'Registration is in progress.'
+				this.color = 'info'
+				this.text = 'Registration is in progress.'
 				const endpoint = '/getvolunteers'
 				if (zip) {
 					axios.get(endpoint, {
@@ -650,9 +648,8 @@ export default {
 							}
 						})
 						.catch(error => {
-							this.snackbarColor = 'error'
-							this.snackbarText = 'Something went wrong. We are looking into it.'
-							this.snackbar = true
+							this.color = 'error'
+							this.text = 'Something went wrong. We are looking into it.'
 							this.progress = false
 							this.volunteerListLoading = false
 							console.log('error in retrieving  data')

@@ -6,6 +6,7 @@ import {cloneDeep, debounce, extend, filter, find, findIndex, indexOf, findKey, 
 export const env = process.env.NODE_ENV
 
 const GOOGLE_MAP_KEY = process.env.VUE_APP_GOOGLE_MAP_KEY
+const ACCESS_TOKEN = ''
 const BASE_URL = process.env.VUE_APP_BASE_PATH
 const API_URL = BASE_URL + '/api'
 
@@ -24,6 +25,7 @@ Axios.defaults.baseURL = '/api'
 
 export const _ = { extend, forIn, isEmpty, find, findIndex, findKey, indexOf, has, includes, filter, without, omit, keyBy, remove, keys, pickBy, cloneDeep, startsWith }
 export const axios = Axios
+export const accessToken = ACCESS_TOKEN
 export const googleMapKey = GOOGLE_MAP_KEY
 export const dataLayer = window.dataLayer || []
 export const vueCliMode = process.env.VUE_APP_CLI_MODE || false

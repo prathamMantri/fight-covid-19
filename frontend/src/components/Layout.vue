@@ -10,6 +10,7 @@
 			clipped-left
 			class="toolbar"
 			extended
+			max-width="100%"
 			:height="$vuetify.breakpoint.xs ? 50 : $vuetify.breakpoint.sm ? 50 : 50"
 			:extension-height="$vuetify.breakpoint.xs ? $route.meta.tabs? 87 : 38 : $vuetify.breakpoint.sm ? $route.meta.tabs ? 87 : 46 : $route.meta.tabs ? 87 : 54"
 		>
@@ -57,16 +58,34 @@
 						</v-tab>
 					</v-tabs>
 				</div>
+				<v-spacer />
 			</v-toolbar-title>
 			<v-spacer />
 			<v-toolbar-items>
-				<v-icon
-					dark
-					@click.stop="logout()"
-				>
-					logout
-				</v-icon>
+				<v-btn v-if="status.loggedIn" @click.stop="handleLogout()" icon text :ripple="false" color="white">
+					<v-icon>
+						logout
+					</v-icon>
+				</v-btn>
+				<v-dialog v-else v-model="signInDialog" max-width="500px">
+					<template v-slot:activator="{ on }">
+						<v-btn text :ripple="false" dark v-on="on">
+							SIGN IN
+						</v-btn>
+					</template>
+					<v-card>
+						<v-card-title>
+							<span class="headline">SIGN IN</span>
+						</v-card-title>
+						<v-card-text>
+							<login />
+						</v-card-text>
+					</v-card>
+				</v-dialog>
 			</v-toolbar-items>
+			<v-toolbar-title slot="extension">
+				<div class="white--text pl-5 text-xs-right">Hello {{user && status.loggedIn ? user.username : 'Guest'}}</div>
+			</v-toolbar-title>
 		</v-app-bar>
 		<v-content>
 			<v-layout class="px-5 py-0">
@@ -79,21 +98,32 @@
 			color="primary"
 			app
 		>
-			<span class="white--text">&copy; Prathamesh Mantri - Fight COVID-19 - 2020</span>
+			<span class="white--text">&copy;  <a class="white--text" href="https://linkedin.com/in/prathamMantri/"> Prathamesh Mantri</a> - Fight COVID-19 - 2020</span>
+			<v-spacer />
+			<span class="white--text"> Visit <a class="white--text" href="https://github.com/prathamMantri/fight-covid-19">Github</a> repository for this project</span>
 		</v-footer>
 	</v-app>
 </template>
 
 <script>
 import NavMain from '@/components/nav/NavMain'
+import Login from '@/views/Login'
 import EventBus from '@/event-bus'
+import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
 
 export default {
 	props: {
 		component: String
 	},
+	created() {
+		const user = sessionStorage.getItem('user')
+		if (user) {
+			console.log('User already logged in', user)
+		}
+	},
 	components: {
 		// SidebarNav
+		Login,
 		NavMain
 	},
 	computed: {
@@ -102,34 +132,32 @@ export default {
 		},
 		list: function () {
 			return this.$route.matched
+		},
+
+		...mapState('auth', ['status']),
+
+	},
+
+	data: function () {
+		return {
+			signInDialog: false,
+			user: JSON.parse(sessionStorage.getItem('user'))
 		}
 	},
 
-	methods: {
-		logout() {
-			const promise = this.$http.get('user/logout')
-			return promise.then(response => {
-				const logout = response.data
-				if (logout) {
-					window.location.replace(logout)
-				}
-			}).catch(error => {
-				if (error) {
-					EventBus.$emit('toast.show', {
-						message: 'Failed to logout',
-						type: 'warning',
-						position: 'top',
-						timeout: 3000
-					})
-					console.log(error.stack)
-				}
-				return []
-			}).finally(() => {
-			}
-			)
-		},
-	}
 
+	methods: {
+		...mapActions('auth',
+			['login', 'logout']
+		),
+		handleLogout() {
+			this.logout()
+			this.signInDialog = false
+		},
+		login() {
+			this.signInDialog = true
+		}
+	}
 }
 </script>
 
@@ -140,9 +168,11 @@ export default {
     a {
       text-decoration: none;
     }
+
     &__title {
       font-weight: 300;
     }
+
     &__content {
       //box-shadow: 0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12) !important;
       box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.35) !important;
@@ -150,13 +180,16 @@ export default {
       position: relative;
       z-index: 1;
     }
+
     &__extension {
       background: var(--v-primary-lighten1);
+
       .v-tabs__bar {
         background: var(--v-primary-lighten1);
       }
 
       margin-left: 0;
+
       > .v-toolbar {
         &__title {
           margin-left: 0px;

@@ -30,6 +30,17 @@ const routes: RouteConfig[] = [
       		component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
       		alias: '/',
       	},
+        {
+          meta: {
+            title: 'Fight COVID-19',
+            keepAlive: true,
+            gtm: 'Login Page'
+          },
+          path: '/login',
+          name: 'Login',
+          component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+          alias: '/login',
+        },
       	{
       		meta: {
       			title: 'Need Help',

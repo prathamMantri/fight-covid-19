@@ -1,8 +1,7 @@
 package com.pmantri.fightcovid19.api;
 
-
-import com.pmantri.fightcovid19.services.HelpService;
-import com.pmantri.fightcovid19.services.VolunteerService;
+import com.pmantri.fightcovid19.models.Request;
+import com.pmantri.fightcovid19.services.RequesterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +13,23 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-public class VolunteerApiController {
+public class RequesterApiController {
+
 
     @Autowired
-    VolunteerService volunteerService;
-    @Autowired
-    HelpService helpService;
+    RequesterService requestService;
 
-    @PostMapping("/checkUniqueVolunteer")
-    public Boolean validateUniqueVolunteer(@RequestBody(required = false) Map params) {
-        return volunteerService.validateUniqueVolunteer((String) params.get("type"), (String) params.get("value"));
-    }
 
-    @GetMapping("/getvolunteers")
-    public ResponseEntity getVolunteers(@RequestParam(required = false) Map params) {
+    @RequestMapping(value = "/postrequest", method = RequestMethod.POST)
+    public ResponseEntity postRequest(
+            @RequestBody Map<String, Object> headers) {
+
         Object responseBody = new LinkedHashMap<>();
-        if (params.get("zip") != null) {
-            responseBody = volunteerService.getVolunteers((String) params.get("zip"));
+
+        if (headers.get("username") != null && !(headers.get("username")).equals("")) {
+            Request request = new Request();
+            //requestService.postRequest(request);
+
         } else {
             Map errors = new HashMap();
             errors.put("notFound", "Wrong input");
@@ -38,10 +37,12 @@ public class VolunteerApiController {
             ((HashMap) responseBody).put("errors", errors);
             return new ResponseEntity((Object) responseBody, HttpStatus.NOT_FOUND);
         }
-
         return ResponseEntity.ok(responseBody);
+    }
 
-
+    @PostMapping("/checkUniqueRequester")
+    public Boolean validateUniqueVolunteer(@RequestBody(required = false) Map params) {
+        return requestService.validateUniqueVolunteer((String) params.get("type"), (String) params.get("value"));
     }
 
 

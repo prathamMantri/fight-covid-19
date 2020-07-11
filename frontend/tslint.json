@@ -3,15 +3,24 @@
 	"extends": [
 		"tslint:recommended"
 	],
+	// jsRules is same format as rules that will apply to js and jsx, or a
+	// boolean true to copy all js compatible rules from the rules section.
+	"jsRules": true,
 	"linterOptions": {
 		"exclude": [
 			"node_modules/**"
 		]
 	},
 	"rules": {
-		"object-literal-key-quotes": [true, "as-needed"],
+		"object-literal-key-quotes": [
+			true,
+			"as-needed"
+		],
 		"forin": false,
-		"curly": [true, "ignore-same-line"],
+		"curly": [
+			true,
+			"ignore-same-line"
+		],
 		//"no-non-null-assertion": false,
 		"comment-format": false,
 		"no-console": false,
@@ -31,9 +40,24 @@
 		},
 		"indent": {
 			"severity": "default",
-			"options": ["tabs"]
+			"options": [
+				"tabs"
+			]
 		},
-		"whitespace": false,
+		"whitespace": [
+			false,
+			"check-branch",
+			"check-decl",
+			"check-operator",
+			"check-module",
+			"check-separator",
+			"check-rest-spread",
+			"check-type",
+			"check-typecast",
+			"check-type-operator",
+			"check-preblock",
+			"check-postbrace"
+		],
 		"no-empty": {
 			"severity": "default",
 			"options": [
@@ -41,13 +65,20 @@
 				"allow-empty-functions"
 			]
 		},
+		"no-eval": false,
 		"no-trailing-whitespace": false,
+
 		"interface-name": false,
-		"jsdoc-format": true,
+		"jsdoc-format": false,
 		"ordered-imports": false,
 		"object-literal-sort-keys": false,
 		"no-consecutive-blank-lines": false,
-		"semicolon": false,
+		"no-shadowed-variable": false, //when we have time this should be enabled and shadowed vars should be renamed.
+		"prefer-for-of": false,
+		"semicolon": {
+			"severity": "default",
+			"options": "never"
+		},
 		"space-before-function-paren": false,
 		"space-within-parens": false,
 		"no-irregular-whitespace": false,
@@ -66,6 +97,7 @@
 				"esSpecCompliant": true
 			}
 		],
-		"typedef": false
+		"typedef": false,
+		"variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
 	}
 }

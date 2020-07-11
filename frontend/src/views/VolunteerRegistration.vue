@@ -30,7 +30,6 @@
 									<ValidationProvider v-slot="{ errors }" name="username" rules="required|min:4|uniqueUserName">
 										<v-text-field
 											v-model="form.username"
-
 											:error-messages="errors"
 											label="Username"
 											required
@@ -143,49 +142,49 @@
 									</ValidationProvider>
 								</v-col>
 								<!--<v-col cols="12" sm="6" md="6" lg="4" xl="4">
-									<ValidationProvider v-slot="{ errors }" name="help categories" rules="required">
-										<v-combobox
-											v-model="form.helpCategorySelected"
-											:filer="filter"
-											:items="helpCategory"
-											:search-input.sync="search"
-											:error-messages="errors"
-											item-text="helpCategoryText"
-											item-value="helpCategoryId"
-											label="I can help with (Please type to add more options)"
-											multiple
-											small-chipsV
-										>
-											<template v-slot:selection="{ attrs, item, parent, selected }">
-												<v-chip
-													v-if="item === Object(item)"
-													v-bind="attrs"
-													:input-value="selected"
-													label
-													color="primary"
-													small
-												>
-													<span class="pr-2">
-														{{ item.helpCategoryText }}
-													</span>
-													<v-icon
-														small
-														@click="parent.selectItem(item)"
-													>close</v-icon>
-												</v-chip>
-											</template>
-											<template v-slot:no-data>
-												<v-list-item>
-													<v-list-item-content>
-														<v-list-item-title>
-															No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
-														</v-list-item-title>
-													</v-list-item-content>
-												</v-list-item>
-											</template>
-										</v-combobox>
-									</ValidationProvider>
-								</v-col>-->
+                  <ValidationProvider v-slot="{ errors }" name="help categories" rules="required">
+                    <v-combobox
+                      v-model="form.helpCategorySelected"
+                      :filer="filter"
+                      :items="helpCategory"
+                      :search-input.sync="search"
+                      :error-messages="errors"
+                      item-text="helpCategoryText"
+                      item-value="helpCategoryId"
+                      label="I can help with (Please type to add more options)"
+                      multiple
+                      small-chipsV
+                    >
+                      <template v-slot:selection="{ attrs, item, parent, selected }">
+                        <v-chip
+                          v-if="item === Object(item)"
+                          v-bind="attrs"
+                          :input-value="selected"
+                          label
+                          color="primary"
+                          small
+                        >
+                          <span class="pr-2">
+                            {{ item.helpCategoryText }}
+                          </span>
+                          <v-icon
+                            small
+                            @click="parent.selectItem(item)"
+                          >close</v-icon>
+                        </v-chip>
+                      </template>
+                      <template v-slot:no-data>
+                        <v-list-item>
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                            </v-list-item-title>
+                          </v-list-item-content>
+                        </v-list-item>
+                      </template>
+                    </v-combobox>
+                  </ValidationProvider>
+                </v-col>-->
 								<v-col cols="12" sm="6" md="6" lg="4" xl="4">
 									<ValidationProvider
 										ref="termsProvider"
@@ -246,18 +245,18 @@
 			</v-col>
 		</v-row>
 		<v-snackbar
-			v-model="snackbar"
-			:color="snackbarColor"
+			v-model="snackbarProps.snackbar"
+			:color="snackbarProps.color"
 			:multi-line="true"
-			:timeout="snackbarTimeout"
+			:timeout="snackbarProps.timeout"
 			:top="true"
 		>
-			{{ snackbarText }}
+			{{ snackbarProps.text }}
 			<v-btn
-				v-if="snackbarColor!='info'"
+				v-if="snackbarProps.color!='info'"
 				dark
 				text
-				@click="snackbar = false"
+				@click="snackbarProps.snackbar = false"
 			>
 				Close
 			</v-btn>
@@ -431,6 +430,7 @@ export default {
 	},
 	data() {
 		const defaultForm = Object.freeze({
+			userType: 'VOLUNTEER',
 			firstName: '',
 			lastName: '',
 			username: '',
@@ -438,7 +438,7 @@ export default {
 			phoneNumber: '',
 			email: '',
 			address1: '',
-			address2:'',
+			address2: '',
 			city: '',
 			state: '',
 			country: '',
@@ -454,14 +454,10 @@ export default {
 			form: Object.assign({}, defaultForm),
 			show: false,
 			conditions: false,
-			snackbar: false,
-			snackbarTimeout: 10000,
-			snackbarText: 'Registration is in progress',
-			snackbarColor: 'info',
 			terms: false,
 			googleAddress: '',
 			helpCategory: [],
-			search:'',
+			search: '',
 			defaultForm
 		}
 	},
@@ -487,6 +483,9 @@ export default {
 			})
 		},
 	},
+	computed: {
+		...mapState('home', ['snackbarProps']),
+	},
 	methods: {
 		resetForm() {
 			this.form = Object.assign({}, this.defaultForm)
@@ -495,7 +494,7 @@ export default {
 		submit() {
 			this.$refs.observer.validate().then(result => {
 				if (result) {
-					this.snackbar = true
+					this.snackbarProps.snackbar = true
 					this.registerVolunteer()
 				}
 			})
@@ -507,7 +506,7 @@ export default {
 			console.log(addressData.administrative_area_level_1)
 			console.log(addressData.postal_code)
 			console.log(addressData.country)
-			this.form.address1 = addressData ? addressData.street_number + ' ' + ( addressData.route ? addressData.route : '') : this.form.address1
+			this.form.address1 = addressData ? addressData.street_number + ' ' + (addressData.route ? addressData.route : '') : this.form.address1
 			this.form.address2 = addressData.name
 			this.form.city = addressData.locality ? addressData.locality : ''
 			this.form.zip = addressData.postal_code ? addressData.postal_code : this.form.zip
@@ -516,30 +515,28 @@ export default {
 		},
 		async registerVolunteer() {
 			return new Promise((resolve, reject) => {
-				this.snackbarColor = 'info'
-				this.snackbarText = 'Registration is in progress.'
-				const endpoint = '/registervolunteer'
+				this.snackbarProps.color = 'info'
+				this.snackbarProps.text = 'Registration is in progress.'
+				const endpoint = '/registeruser'
 				axios.post(endpoint, this.form)
 					.then(response => {
 						console.log('saving the data')
 						if (response && response.data) {
 							console.log('response saved')
-							this.snackbarColor = 'success'
-							this.snackbarText = 'Registration is successful.'
+							this.snackbarProps.color = 'success'
+							this.snackbarProps.text = 'Registration is successful.'
 						}
 					})
 					.catch(error => {
-						this.$refs.observer.validate().then(result => {
-							if (result) {
-								this.snackbar = true
-								this.registerVolunteer()
-							}
-						})
-
-
-						this.snackbarColor = 'error'
-						this.snackbarText = 'Something went wrong. We are looking into it.'
-						this.snackbar = true
+						/*this.$refs.observer.validate().then(result => {
+                if (result) {
+                  this.snackbar = true
+                  this.registerVolunteer()
+                }
+              })*/
+						this.snackbarProps.color = 'error'
+						this.snackbarProps.text = 'Something went wrong. We are looking into it.'
+						this.snackbarProps.snackbar = true
 						console.log('error in saving  data')
 						if (error) {
 							console.log(error.stack)

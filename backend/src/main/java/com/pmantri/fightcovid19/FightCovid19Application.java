@@ -9,7 +9,6 @@ import org.springframework.web.WebApplicationInitializer;
 @SpringBootApplication
 public class FightCovid19Application extends SpringBootServletInitializer implements WebApplicationInitializer {
 
-
     public FightCovid19Application() {
         super();
         setRegisterErrorPageFilter(false);

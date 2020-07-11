@@ -1,9 +1,11 @@
 package com.pmantri.fightcovid19.services;
 
 import com.pmantri.fightcovid19.models.Request;
-import com.pmantri.fightcovid19.models.Requester;
+import com.pmantri.fightcovid19.models.User;
 
-public interface RequestService {
-    void postRequest(Requester requester, Request request);
+public interface RequesterService {
+
+    void postRequest(User requester, Request request);
     Boolean validateUniqueVolunteer(String type, String value);
+
 }
