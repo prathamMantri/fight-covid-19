@@ -69,8 +69,8 @@
 				</v-btn>
 				<v-dialog v-else v-model="signInDialog" max-width="500px">
 					<template v-slot:activator="{ on }">
-						<v-btn text :ripple="false" dark v-on="on">
-							SIGN IN
+						<v-btn text icon :ripple="false" dark v-on="on">
+							<v-icon>{{icons.mdiLogin}}</v-icon>
 						</v-btn>
 					</template>
 					<v-card>
@@ -100,7 +100,7 @@
 		>
 			<span class="white--text">&copy;  <a class="white--text" href="https://linkedin.com/in/prathamMantri/"> Prathamesh Mantri</a> - Fight COVID-19 - 2020</span>
 			<v-spacer />
-			<span class="white--text"> Visit <a class="white--text" href="https://github.com/prathamMantri/fight-covid-19">Github</a> repository for this project</span>
+			<span class="white--text"> Visit <a class="white--text" href="https://github.com/prathamMantri/fight-covid-19"><v-icon>{{ icons.mdiGithub }}</v-icon></a>for this project</span>
 		</v-footer>
 	</v-app>
 </template>
@@ -110,6 +110,10 @@ import NavMain from '@/components/nav/NavMain'
 import Login from '@/views/Login'
 import EventBus from '@/event-bus'
 import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+import {
+	mdiGithub,
+	mdiLogin
+} from '@mdi/js'
 
 export default {
 	props: {
@@ -141,7 +145,8 @@ export default {
 	data: function () {
 		return {
 			signInDialog: false,
-			user: JSON.parse(sessionStorage.getItem('user'))
+			user: JSON.parse(sessionStorage.getItem('user')),
+			icons: {mdiGithub,mdiLogin }
 		}
 	},
 
