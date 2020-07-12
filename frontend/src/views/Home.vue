@@ -48,7 +48,7 @@
 		</v-row>
 		<v-row align="center" sm="12">
 			<div>
-				<p class="display-3 text-sm-center">Under construction.. Please be patient!</p>
+				<p class="display-3 text-sm-center">Under construction.. Please keep patience!</p>
 			</div>
 		</v-row>
 		<v-snackbar
