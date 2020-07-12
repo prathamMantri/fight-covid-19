@@ -1,9 +1,9 @@
 export default class User {
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 
-  constructor(username: String, password: String) {
-    this.username = username
-    this.password = password
+  constructor(username: string, password: string) {
+  	this.username = username
+  	this.password = password
   }
 }

@@ -146,7 +146,7 @@ export default {
 				color: 'info',
 			}
 			this.logout()
-      this.resetSnackbarProps()
+			this.resetSnackbarProps()
 		}
 	},
 }

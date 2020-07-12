@@ -15,10 +15,10 @@ const state = {
 const getters = {}
 const actions = {}
 const mutations = {
-  setSnackbarProps(state: { snackbarProps: any }, payload: any){
+  setSnackbarProps(state, payload){
     state.snackbarProps = payload
   },
-  resetSnackbarProps(state: { snackbarProps: any }, payload: any){
+  resetSnackbarProps(state){
     state.snackbarProps =  {
       snackbar: false,
       timeout: 5000,

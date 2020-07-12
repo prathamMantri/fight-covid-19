@@ -64,7 +64,7 @@ export default {
 	mounted() {
 		this.$refs.mapRef.$mapPromise.then(map => {
 			this.map = map
-	//		this.initMap(map)
+			//		this.initMap(map)
 		//	this.addMarker()
 		})
 	},

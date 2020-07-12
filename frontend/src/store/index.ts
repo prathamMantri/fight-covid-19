@@ -10,14 +10,14 @@ const actions = {}
 const mutations = {}
 
 const store = new Vuex.Store({
-  modules: Modules,
-  strict: false,
-  state() {
-    return state
-  },
-  getters: getters,
-  actions: actions,
-  mutations: mutations
+	modules: Modules,
+	strict: false,
+	state() {
+		return state
+	},
+	getters: getters,
+	actions: actions,
+	mutations: mutations
 })
 
 export default store

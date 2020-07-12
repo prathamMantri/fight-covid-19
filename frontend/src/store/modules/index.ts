@@ -6,8 +6,8 @@ import Home from './home'
 
 
 export default {
-  volunteer: Volunteer,
-  requester : Requester,
-  home: Home,
-  auth: Auth
+	volunteer: Volunteer,
+	requester : Requester,
+	home: Home,
+	auth: Auth
 }
