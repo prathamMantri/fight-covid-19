@@ -360,6 +360,7 @@ import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete'
 import {axios, _} from '../bootstrap'
 import {required, email, min, max} from 'vee-validate/dist/rules'
 import {extend, ValidationObserver, ValidationProvider, localize, setInteractionMode} from 'vee-validate'
+import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
 
 setInteractionMode('eager')
 

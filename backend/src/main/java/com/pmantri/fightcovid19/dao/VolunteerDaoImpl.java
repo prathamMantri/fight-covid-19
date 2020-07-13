@@ -22,23 +22,23 @@ public class VolunteerDaoImpl implements VolunteerDao {
     private static final String INSERT_VOL_CRED_HELP_CAT = "INSERT INTO FC_VOLUNTEER_HELP_CATEGORIES (" +
             "VOL_CRED_ID, " +
             "CAT_HELP_ID) VALUES(?, ?)";
-    private static final String GET_VOLUNTEERS = "select FC_VOL_CRED_FIRSTNAME, " +
-            "FC_VOL_CRED_LASTNAME, " +
-            "FC_VOL_PHONE_NUMBER_1, " +
-            "FC_VOL_EMAIL_ADDR_1, " +
-            "FC_VOL_CITY, " +
-            "FC_VOL_STATE, " +
-            "FC_VOL_COUNTRY, " +
-            "FC_VOL_ZIP, " +
-            "FC_VOL_CRED_ACTIVE, " +
-            "FC_VOL_CRED_VERIFIED, " +
-            "FC_VOL_STREET_NUMBER_1, " +
-            "FC_VOL_STREET_NUMBER_2 " +
-            "from FC_VOLUNTEER_CREDENTIALS VCRED, FC_VOLUNTEER_CONTACT VCON, FC_VOLUNTEER_ADDRESS VADDR \n" +
-            "where \n" +
-            "VCRED.FC_VOL_CRED_ID = VCON.VOL_CRED_ID\n" +
-            "and VCRED.FC_VOL_CRED_ID = VADDR.VOL_CRED_ID\n" +
-            "and VADDR.FC_VOL_ZIP = ?";
+    private static final String GET_VOLUNTEERS = "select USER.FC_USER_FIRSTNAME, " +
+            "USER.FC_USER_LASTNAME, " +
+            "CONTACT.FC_VOL_PHONE_NUMBER_1, " +
+            "CONTACT.FC_VOL_EMAIL_ADDR_1, " +
+            "ADDRESS.FC_VOL_CITY, " +
+            "ADDRESS.FC_VOL_STATE, " +
+            "ADDRESS.FC_VOL_COUNTRY, " +
+            "ADDRESS.FC_VOL_ZIP, " +
+            "ADDRESS.FC_VOL_STREET_NUMBER_1, " +
+            "ADDRESS.FC_VOL_STREET_NUMBER_2, " +
+            "USER.FC_USER_ACTIVE, " +
+            "USER.FC_USER_VERIFIED " +
+            "from FC_USER_CREDENTIALS USER, FC_VOLUNTEER_CONTACT CONTACT, FC_VOLUNTEER_ADDRESS ADDRESS " +
+            "where " +
+            "USER.FC_USER_ID = CONTACT.USER_ID " +
+            "and USER.FC_USER_ID = ADDRESS.USER_ID " +
+            "and ADDRESS.FC_VOL_ZIP = ?";
 
     @Autowired
     JdbcTemplate jdbcTemplate;
@@ -52,16 +52,16 @@ public class VolunteerDaoImpl implements VolunteerDao {
         try {
             return jdbcTemplate.query(GET_VOLUNTEERS, (rs, rowNum) -> {
                 User volunteer = new User();
-                volunteer.setFirstName(rs.getString("FC_VOL_CRED_FIRSTNAME"));
-                volunteer.setLastName(rs.getString("FC_VOL_CRED_LASTNAME"));
+                volunteer.setFirstName(rs.getString("FC_USER_FIRSTNAME"));
+                volunteer.setLastName(rs.getString("FC_USER_LASTNAME"));
                 volunteer.setPhoneNumber(rs.getString("FC_VOL_PHONE_NUMBER_1"));
                 volunteer.setEmailAddress(rs.getString("FC_VOL_EMAIL_ADDR_1"));
                 volunteer.setCity(rs.getString("FC_VOL_CITY"));
                 volunteer.setState(rs.getString("FC_VOL_STATE"));
                 volunteer.setCountry(rs.getString("FC_VOL_COUNTRY"));
                 volunteer.setZip(rs.getString("FC_VOL_ZIP"));
-                volunteer.setActive(rs.getInt("FC_VOL_CRED_ACTIVE"));
-                volunteer.setVerified(rs.getInt("FC_VOL_CRED_VERIFIED"));
+                volunteer.setActive(rs.getInt("FC_USER_ACTIVE"));
+                volunteer.setVerified(rs.getInt("FC_USER_VERIFIED"));
                 volunteer.setAddress1(rs.getString("FC_VOL_STREET_NUMBER_1"));
                 volunteer.setAddress1(rs.getString("FC_VOL_STREET_NUMBER_2"));
                 return volunteer;
