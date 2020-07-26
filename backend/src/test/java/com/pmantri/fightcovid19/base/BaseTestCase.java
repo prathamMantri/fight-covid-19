@@ -1,14 +1,14 @@
-package com.pmantri.fightcovid19.base;
+package com.pmantri.lockdownvalidukan.base;
 
-import com.pmantri.fightcovid19.FightCovid19Application;
-import com.pmantri.fightcovid19.config.MySqlDevConfig;
+import com.pmantri.lockdownvalidukan.LockdownValiDukanApplication;
+import com.pmantri.lockdownvalidukan.config.MySqlDevConfig;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {FightCovid19Application.class, MySqlDevConfig.class})
+@SpringBootTest(classes = {LockdownValiDukanApplication.class, MySqlDevConfig.class})
 @ActiveProfiles("dev")
 public class BaseTestCase {
 	{

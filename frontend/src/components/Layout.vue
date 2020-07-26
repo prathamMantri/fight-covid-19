@@ -9,32 +9,34 @@
 			color="primary"
 			clipped-left
 			class="toolbar"
-			extended
 			max-width="100%"
 			:height="$vuetify.breakpoint.xs ? 50 : $vuetify.breakpoint.sm ? 50 : 50"
-			:extension-height="$vuetify.breakpoint.xs ? $route.meta.tabs? 87 : 38 : $vuetify.breakpoint.sm ? $route.meta.tabs ? 87 : 46 : $route.meta.tabs ? 87 : 54"
+
 		>
-			<nav-main attach="main-toolbar" />
-			<v-toolbar-title class="ml-1 white--text pl-2">
+			<!--extended-->
+			<!--:extension-height="$vuetify.breakpoint.xs ? $route.meta.tabs? 87 : 38 : $vuetify.breakpoint.sm ? $route.meta.tabs ? 87 : 46 : $route.meta.tabs ? 87 : 54"-->
+			<nav-main attach="main-toolbar"  />
+			<v-toolbar-title class="ml-1 px-2 pt-1 black--text">
 				<router-link
+          px-2
 					:to="{ name: 'Home'}"
-					class="title-link white--text"
+					class="title-link font-weight-medium black--text"
 				>
-					Fight COVID-19
+					Lockdown वाली दुकान
 				</router-link>
 			</v-toolbar-title>
-			<v-toolbar-title
+			<!--	<v-toolbar-title
 				slot="extension"
-				class="white--text title-link"
+				class="white&#45;&#45;text title-link"
 			>
 				<div :class="$route.meta.tabs?'text-xs-left pt-3 pl-2 ml-1':'text-xs-left'">
 					<div :class="$route.meta.backComponentName?'':'route-name'">
 						<router-link
 							v-if="$route.meta.backComponentName"
 							:to="{ name: $route.meta.backComponentName}"
-							class="title-link white--text pr-2"
+							class="title-link white&#45;&#45;text pr-2"
 						>
-							<v-icon class="title-link white--text">
+							<v-icon class="title-link white&#45;&#45;text">
 								arrow_back
 							</v-icon>
 						</router-link>
@@ -46,12 +48,12 @@
 						slider-color="white"
 						height="40"
 						grow
-						class="title-link white--text"
+						class="title-link white&#45;&#45;text"
 					>
 						<v-tab
 							v-for="tab in $route.meta.tabs"
 							:key="tab"
-							class="title-link white--text pl-0 font-weight-light"
+							class="title-link white&#45;&#45;text pl-0 font-weight-light"
 							ripple
 						>
 							{{ tab }}
@@ -59,17 +61,17 @@
 					</v-tabs>
 				</div>
 				<v-spacer />
-			</v-toolbar-title>
+			</v-toolbar-title>-->
 			<v-spacer />
 			<v-toolbar-items>
 				<v-btn v-if="status.loggedIn" @click.stop="handleLogout()" icon text :ripple="false" color="white">
-					<v-icon>
+					<v-icon color="black">
 						logout
 					</v-icon>
 				</v-btn>
 				<v-dialog v-else v-model="signInDialog" max-width="500px">
 					<template v-slot:activator="{ on }">
-						<v-btn text icon :ripple="false" dark v-on="on">
+						<v-btn text icon color="black" :ripple="false" dark v-on="on">
 							<v-icon>{{icons.mdiLogin}}</v-icon>
 						</v-btn>
 					</template>
@@ -83,9 +85,9 @@
 					</v-card>
 				</v-dialog>
 			</v-toolbar-items>
-			<v-toolbar-title slot="extension">
-				<div class="white--text pl-5 text-xs-right">Hello {{user && status.loggedIn ? user.username : 'Guest'}}</div>
-			</v-toolbar-title>
+		<!--	<v-toolbar-title slot="extension">
+				<div class="white&#45;&#45;text pl-5 text-xs-right">Hello {{user && status.loggedIn ? user.username : 'Guest'}}</div>
+			</v-toolbar-title>-->
 		</v-app-bar>
 		<v-content>
 			<v-layout class="px-5 py-0">
@@ -98,9 +100,9 @@
 			color="primary"
 			app
 		>
-			<span class="white--text">&copy;  <a class="white--text" href="https://linkedin.com/in/prathamMantri/"> Prathamesh Mantri</a> - Fight COVID-19 - 2020</span>
+			<span class="black--text">&copy;  <a class="black--text" href="https://linkedin.com/in/prathamMantri/"> Prathamesh Mantri</a> - Lockdown वाली दुकान - 2020</span>
 			<v-spacer />
-			<span class="white--text"> Visit <a class="white--text" href="https://github.com/prathamMantri/fight-covid-19"><v-icon>{{ icons.mdiGithub }}</v-icon></a>for this project</span>
+			<span class="black--text"> Visit <a class="brown--text" href="https://github.com/prathamMantri/lockdownvalidukan"><v-icon class="pb-1">{{ icons.mdiGithub }}</v-icon></a> for this project</span>
 		</v-footer>
 	</v-app>
 </template>

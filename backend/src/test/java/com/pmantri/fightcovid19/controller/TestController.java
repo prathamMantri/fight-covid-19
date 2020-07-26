@@ -1,4 +1,4 @@
-package com.pmantri.fightcovid19.controller;
+package com.pmantri.lockdownvalidukan.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;

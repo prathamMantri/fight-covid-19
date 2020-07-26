@@ -23,14 +23,14 @@ export default {
 		},
 
 		{
-			text: 'Volunteer Register',
-			url: '/registervolunteer',
+			text: 'Order Now',
+			url: '/ordernow',
 			icon: 'search',
 		},
 
 		{
-			text: 'Call for Help',
-			url: '/needhelp',
+			text: 'Search Order',
+			url: '/orders',
 			icon: 'search',
 		},
 		{

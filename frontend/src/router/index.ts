@@ -21,7 +21,7 @@ const routes: RouteConfig[] = [
       [
       	{
       		meta: {
-      			title: 'Fight COVID-19',
+      			title: 'Lockdown Vali Dukan',
       			keepAlive: true,
       			gtm: 'Home Page'
       		},
@@ -48,9 +48,9 @@ const routes: RouteConfig[] = [
       			backComponentName: 'Home',
       		},
       		caseSensitive: false,
-      		path: 'needhelp',
-      		name: 'Need Help',
-      		component: () => import(/* webpackChunkName: "needHelp" */ '../views/NeedHelp.vue')
+      		path: 'ordernow',
+      		name: 'Order Now',
+      		component: () => import(/* webpackChunkName: "orderNow" */ '../views/OrderNow.vue')
       	},
       	{
       		meta: {

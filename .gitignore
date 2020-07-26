@@ -29,14 +29,14 @@ build/
 
 ### VS Code ###
 .vscode/
-backend/src/main/java/com/pmantri/fightcovid19/config/MySqlDevConfig.java
+backend/src/main/java/com/pmantri/lockdownvalidukan/config/MySqlDevConfig.java
 backend/src/main/resources/META-INF/
 backend/src/main/resources/application-dev.properties
 backend/src/main/resources/public/static/css/
 backend/src/main/resources/public/static/js/
 backend/src/main/resources/static/
 backend/src/main/resources/templates/
-frontend/public/fightcovid19.png
+frontend/public/lockdownvalidukan-logo.png
 frontend/src/main.js
 frontend/src/main.js.map
 frontend/src/plugins/grid.js

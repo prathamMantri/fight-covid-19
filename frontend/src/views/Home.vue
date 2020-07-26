@@ -1,50 +1,29 @@
 <template>
-	<v-container class="pa-0">
+	<v-container class="px-0 pt-4">
 		<vue-headful
 			title="Home"
 		/>
 		<v-row align="center" sm="12">
-			<!--	<v-carousel
-          cycle
-          height="400"
-          interval="2000"
-          hide-delimiter-background
-          show-arrows-on-hover
-        >
-          <v-carousel-item
-            v-for="(slide, i) in slides"
-            :key="i"
-          >
-            <v-sheet
-              :color="colors[i]"
-              height="100%"
-            >
-              <v-row
-                class="fill-height"
-                align="center"
-                justify="center"
-              >
-                <div class="display-3">STAY {{slide}}</div>
-              </v-row>
-            </v-sheet>
-          </v-carousel-item>
-        </v-carousel>-->
-		</v-row>
-		<v-row align="center" sm="12">
-			<v-col cols="12" sm="6">
-				<div class="text-center">
-					<div class="my-1">
-						<v-btn color="primary" x-large dark to="/needhelp">I NEED HELP</v-btn>
-					</div>
-				</div>
-			</v-col>
-			<v-col cols="12" sm="6">
-				<div class="text-center">
-					<div class="my-1">
-						<v-btn color="primary" x-large dark to="/registervolunteer">I CAN HELP</v-btn>
-					</div>
-				</div>
-			</v-col>
+			<v-carousel
+				height="650"
+				interval="2000"
+				hide-delimiter-background
+				show-arrows-on-hover
+			>
+				<v-carousel-item
+					v-for="(slide,i) in carousalSlides"
+					:key="i"
+					reverse-transition="fade-transition"
+					transition="fade-transition"
+				>
+					<v-img
+						:src="require('@/assets/images/'+slide.src)"
+						height="650"
+						contain
+					>
+					</v-img>
+				</v-carousel-item>
+			</v-carousel>
 		</v-row>
 		<v-row align="center" sm="12">
 			<div>
@@ -79,7 +58,7 @@
 <script>
 
 import vueHeadful from 'vue-headful'
-import {mapActions, mapGetters, mapMutations, mapState} from 'vuex'
+import {mapState} from 'vuex'
 
 export default {
 	name: 'Home',
@@ -92,6 +71,7 @@ export default {
 		return {
 			needHelpDialog: false,
 			canHelpDialog: false,
+
 			items: [
 				{title: 'Dashboard', icon: 'mdi-view-dashboard'},
 				{title: 'Contact', icon: 'mdi-phone-in-talk '},
@@ -104,12 +84,20 @@ export default {
 				'red lighten-1',
 				'deep-purple accent-4'
 			],
-			slides: [
-				'SAFE',
-				'SECURE',
-				'INSIDE',
-				'HEALTHY',
-				'AWARE'
+			carousalSlides: [
+				{
+					src: 'lockdownvalidukan.png',
+				},
+				{
+					src: 'lockdownvalidukan-logo.png',
+				},
+				{
+					src: 'lockdownvalidukan-features.png',
+				},
+				{
+					src: 'lockdownvalidukan-contact.png',
+				},
+
 			],
 			miniVariant: true,
 			expandOnHover: true,

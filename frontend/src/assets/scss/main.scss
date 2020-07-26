@@ -9,26 +9,29 @@
 //
 //@import '~flag-icon-css/sass/flag-icon';
 
+
+
+
+@import "~vuetify/src/styles/styles.sass";
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;500;600;700&family=Roboto&display=swap");
+
 html, body {
   width: 100%;
   //height: 100%;
 }
 
+
+
 .theme--light {
   &.application {
+
     background: #fff;
+
     //background: var(--v-secondary-lighten3) !important;
   }
 }
-
-/*#app{
-	position: fixed;
-	overflow-y: auto;
-	scroll-behavior: smooth;
-	overflow-scrolling: auto;
-}*/
-.container.fluid {
-  //background-color: #efefef !important;
+#app,{
+  font-family: Kalam, Roboto !important;
 }
 
 .no-min-width {
@@ -37,6 +40,14 @@ html, body {
 
 .v-btn {
   text-transform: none;
+}
+
+.v-data-table{
+  font-family: Roboto !important;
+}
+
+.div{
+  font-family: Kalam !important;
 }
 
 .page {

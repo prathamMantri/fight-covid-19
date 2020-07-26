@@ -2,38 +2,30 @@
 import colors from 'vuetify/lib/util/colors'
 import _ from 'lodash'
 
-let fightCovid19BlueTheme = _.clone(colors.blue)
-fightCovid19BlueTheme = _.assign(fightCovid19BlueTheme, {
-	base: '#1976D2', // main header background color
-	lighten1: '#039BE5', //secondary header background color
-	accent1: '#009de1' //checkbox color
+let lockdownYellowTheme = _.clone(colors.yellow)
+lockdownYellowTheme = _.assign(lockdownYellowTheme, {
+	base: '#FFC400', // main header background color
+	lighten1: '#FFD740', //secondary header background color
+	accent1: '#FFE57F' //checkbox color
 })
 
-let fightCovid19GrayTheme = _.clone(colors.grey)
-fightCovid19GrayTheme = _.assign(fightCovid19GrayTheme, {
-	lighten6: '#B6DFF4',
-	lighten5: '#fafafa',
-	lighten4: '#f5f5f5', //card heading backgrounds
-	lighten3: '#eee', //main page background color
-	lighten2: '#cfcfcf', //dividers between items
-	lighten1: '#cccccc',
-	base: '#BDBDBD', //card heading border color
-	darken1: '#999999', //label color
-	darken2: '#707070', //card headings and footer text
-	darken3: '#616161',
-	darken4: '#333' //body text
+let lockdownBrownTheme = _.clone(colors.brown)
+lockdownBrownTheme = _.assign(lockdownBrownTheme, {
+	base: '#5D4037',
+	lighten1: '#8D6E63',
 })
 
-let fightCovid19AccentTheme = _.clone(colors.blue)
 
-fightCovid19AccentTheme = _.assign(fightCovid19AccentTheme, {
+let lockdownAccentTheme = _.clone(colors.yellow)
+
+lockdownAccentTheme = _.assign(lockdownAccentTheme, {
 	base: '#009de1', // main header background color
 })
 
 export default {
-	primary: fightCovid19BlueTheme,
-	secondary: fightCovid19GrayTheme,
-	accent: fightCovid19AccentTheme,
+	primary: lockdownYellowTheme,
+	secondary: lockdownBrownTheme,
+	accent: lockdownAccentTheme,
 	cwGray: '#7f7f7f',
 	white: '#fff',
 	black: '#000',

@@ -11,7 +11,7 @@
 		<template
 			v-slot:activator="{ on }"
 		>
-			<v-icon dark v-on="on">menu</v-icon>
+			<v-icon dark color="black" v-on="on">menu</v-icon>
 		</template>
 		<v-container
 			fluid

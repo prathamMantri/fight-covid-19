@@ -1,7 +1,7 @@
-package com.pmantri.fightcovid19.dao.impl;
+package com.pmantri.lockdownvalidukan.dao.impl;
 
 
-import com.pmantri.fightcovid19.base.BaseTestCase;
+import com.pmantri.lockdownvalidukan.base.BaseTestCase;
 
 public class VolunteerDaoImplTest extends BaseTestCase {
 }

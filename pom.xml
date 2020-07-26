@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pmantri</groupId>
-    <artifactId>fight-covid-19</artifactId>
+    <artifactId>lockdownvalidukan</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>fight-covid-19</name>
+    <name>lockdownvalidukan</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

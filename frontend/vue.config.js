@@ -30,7 +30,7 @@ module.exports = {
 	/* prodServer: {
     proxy: {
       '/api': {
-        target: 'https://fightcovid19.care', // this configuration needs to correspond to the Spring Boot backends' application.properties server.port
+        target: 'https://lockdownvalidukan.care', // this configuration needs to correspond to the Spring Boot backends' application.properties server.port
         ws: true,
         changeOrigin: true
       }

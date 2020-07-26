@@ -1,0 +1,20 @@
+
+runtime: java
+env: flex
+runtime_config:
+  jdk: openjdk8
+env_variables:
+  SPRING_PROFILES_ACTIVE: "prod"
+handlers:
+  - url: /.*
+    script: this field is required, but ignored
+manual_scaling:
+  instances: 1
+
+network:
+  instance_tag: prod-instance
+  name: fight-covid-19-main-instance
+  session_affinity: true
+  forwarded_ports:
+    - 80
+    - 80/tcp
